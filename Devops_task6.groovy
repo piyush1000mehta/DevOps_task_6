@@ -44,7 +44,7 @@ triggers {
         upstream('job2_deploy.', 'SUCCESS')
     }
 steps{
-shell('''nodeport=$(sudo kubectl get svc -o jsonpath={.items[*].spec.ports[*].nodePort})
+shell('''nodeport=$(kubectl get svc -o jsonpath={.items[*].spec.ports[*].nodePort})
 
          status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.99.100:$nodeport)
 
