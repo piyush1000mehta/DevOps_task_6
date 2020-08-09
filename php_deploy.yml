@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deploy
+spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: php
+   template:
+     metadata:
+       name: php-deploy-pod
+       labels:
+         app: php
+     spec: 
+       containers:
+       - name: php-deploy-cont
+         image: vimal13/apache-webserver-php
+         volumeMounts:
+         - name: php-deploy-vol
+           mountPath: /var/www/html/
+         volumeMounts:
+         - name: php-deploy-log
+           mountPath: /var/log/httpd/
+       volumes:
+       - name: php-deploy-vol
+         persistentVolumeClaim:
+           claimName: php-deploy-pvc
+       - name: php-deploy-log
+         persistentVolumeClaim:
+           claimName: php-deploy-pvc
+

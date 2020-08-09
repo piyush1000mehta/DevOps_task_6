@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-deploy-svc
+  labels:
+    app: php
+spec:
+  selector:
+    app: php
+  type: NodePort
+  ports:
+  - port: 81
+    targetPort: 80
