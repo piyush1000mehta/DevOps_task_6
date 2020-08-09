@@ -17,7 +17,7 @@ shell('''if ! kubectl get pvc | grep php-deploy-pvc
            PODS=$(kubectl get pods -l app=php -o jsonpath="{.items[*].metadata.name}")
            for i in $PODS
             do 
-             kubectl cp /root/.jenkins/workspace/seed_job/*.php $i:/var/www/html/
+             kubectl cp /root/.jenkins/workspace/seed_job/ *.php $i:/var/www/html/
             done
           else
            kubectl  create -f /root/.jenkins/workspace/seed_job/php_deploy.yml
@@ -25,7 +25,7 @@ shell('''if ! kubectl get pvc | grep php-deploy-pvc
            PODS=$(sudo kubectl get pods -l app=php -o jsonpath="{.items[*].metadata.name}")
            for i in $PODS
             do 
-             kubectl cp /root/.jenkins/workspace/seed_job/*.php $i:/var/www/html/
+             kubectl cp /root/.jenkins/workspace/seed_job/ *.php $i:/var/www/html/
             done
           fi 
          fi  
