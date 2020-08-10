@@ -56,20 +56,16 @@ shell('''nodeport=$(kubectl get svc -o jsonpath={.items[*].spec.ports[*].nodePor
          exit 1
          fi''')
 }
-publishers {
-        downstreamParameterized {
-            trigger('job4_notify_email6') {
-				condition('FAILED')
-				triggerWithNoParameters()
-            }
-        }
-    }
 }
 
 
 job(' job4_notify_email'){
 description(' this job will send email to developers ')
- publishers {
+triggers {
+        upstream('job3_testing', 'FAILURE')
+    }
+ 
+publishers {
         extendedEmail {
             recipientList('piyushmehta9909@gmail.com')
             defaultSubject('Oops')
@@ -83,5 +79,15 @@ description(' this job will send email to developers ')
             }
         }
     }
+}
+buildPipelineView('DevOps_task_6'){
+filterBuildQueue()
+filterExecutors()
+title('Web-Server Deployment from Groovy Script')
+displayedBuilds(5)
+selectedJob('seed_job')
+alwaysAllowManualTrigger()
+showPipelineParameters()
+refreshFrequency(60)
 }
 }
