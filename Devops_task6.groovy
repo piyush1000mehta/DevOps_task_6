@@ -1,3 +1,12 @@
+#job('job1_pull_code')
+#{
+#description('this job will pull groovy script from Github')
+
+#triggers {
+#upstream('seed_job','SUCCESS')
+#}
+#}
+
 job('job2_deploy.'){
 description('this job will deploy code')
 triggers {
@@ -56,14 +65,20 @@ shell('''nodeport=$(kubectl get svc -o jsonpath={.items[*].spec.ports[*].nodePor
          exit 1
          fi''')
 }
+publishers {
+        downstreamParameterized {
+            trigger('job4_notify_email') {
+                condition('FAILED')
+                triggerWithNoParameters()
+                
+               
+            }}
+
 }
 
 
 job(' job4_notify_email'){
 description(' this job will send email to developers ')
-triggers {
-        upstream('job3_testing', 'FAILURE')
-    }
  
 publishers {
         extendedEmail {
@@ -84,7 +99,7 @@ buildPipelineView('DevOps_task_6'){
 filterBuildQueue()
 filterExecutors()
 title('Web-Server Deployment from Groovy Script')
-displayedBuilds(5)
+displayedBuilds(1)
 selectedJob('seed_job')
 alwaysAllowManualTrigger()
 showPipelineParameters()
