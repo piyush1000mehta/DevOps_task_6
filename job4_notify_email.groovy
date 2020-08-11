@@ -1,14 +1,7 @@
-/*#job('job1_pull_code')
-#{
-#description('this job will pull groovy script from Github')
-
-#triggers {
-#upstream('seed_job','SUCCESS')
-#}
-#}*/
 
 
-job(' job4_notify_email'){
+
+job('job4_notify_email'){
 description(' this job will send email to developers ')
  
 publishers {
