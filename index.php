@@ -3,7 +3,7 @@
 
 <?php
 
-print "welcome to LinuxWorld's web server for testing";
+print "welcome to LinuxWorld web server for testing";
 
 
 print `ifconfig`;
