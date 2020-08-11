@@ -27,16 +27,5 @@ publishers {
             }}
 
 }
-buildPipelineView('DevOps_task_6'){
-filterBuildQueue()
-filterExecutors()
-title('Web-Server Deployment from Groovy Script')
-displayedBuilds(1)
-selectedJob('seed_job')
-alwaysAllowManualTrigger()
-showPipelineParameters()
-refreshFrequency(60)
-}
-
 }
 
