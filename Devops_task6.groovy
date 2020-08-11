@@ -75,7 +75,7 @@ publishers {
             }}
 
 }
-
+}
 
 job(' job4_notify_email'){
 description(' this job will send email to developers ')
@@ -105,4 +105,5 @@ alwaysAllowManualTrigger()
 showPipelineParameters()
 refreshFrequency(60)
 }
+
 }
