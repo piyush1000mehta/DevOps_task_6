@@ -1,11 +1,11 @@
-#job('job1_pull_code')
+/*#job('job1_pull_code')
 #{
 #description('this job will pull groovy script from Github')
 
 #triggers {
 #upstream('seed_job','SUCCESS')
 #}
-#}
+#}*/
 
 job('job2_deploy.'){
 description('this job will deploy code')
